@@ -1,0 +1,99 @@
+@import "normalize.css";
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap");
+body {
+  padding: 0;
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  background-image: url(../img/sunny.jpg);
+  background-size: cover;
+  color: white;
+  font-family: "Roboto", sans-serif;
+}
+
+.section-1 {
+  p {
+    margin: 0;
+  }
+  &__forecast {
+    font-weight: 100;
+    font-size: 35px;
+  }
+  &__weather {
+    font-weight: 400;
+    font-size: 40px;
+    margin-bottom: 50px !important;
+    background: #ffffff;
+    background: linear-gradient(to bottom, #ffffff 70%, rgba(255, 255, 255, 0) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  &__updated {
+      font-weight: 100;
+  }
+  &__temperature {
+      font-weight: 100;
+      font-size: 130px;
+  }
+  &__text-container {
+    font-weight: 100;
+    font-size: 20px;
+      display: flex;
+      gap: 50px;
+  }
+}
+
+.weather-cards {
+  width: 25%;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8.8px);
+  -webkit-backdrop-filter: blur(8.8px);
+  border-right: 1px solid #ffffff80;
+}
+.main-container {
+  width: 70%;
+  padding: 35px;
+  display: flex;
+  flex-direction: column;
+  gap: 10%;
+}
+
+header {
+  h1 {
+    font-weight: 100;
+    font-size: 20px;
+    margin: 0;
+  }
+}
+.search {
+  margin-bottom: 15px;
+  padding: 5px 10px;
+  border-bottom: 1px #ffffff80 solid;
+  display: flex;
+  &__bar {
+    border: none;
+    padding: 2.5px 5px;
+    background-color: transparent;
+    width: 100%;
+    &:focus-visible {
+      outline: none;
+    }
+  }
+  &__button {
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    background-color: transparent;
+    img {
+      height: 20px;
+    }
+  }
+  &__temp {
+    height: 30px;
+  }
+}
