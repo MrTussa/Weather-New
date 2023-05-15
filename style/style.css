@@ -1,21 +1,13 @@
-@charset "UTF-8";
-@import url(c:\Users\МавлоновШ\frontend\JavaScript\Weather-yandex\style\normalize.css);
+@import "normalize.css";
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap");
 body {
   padding: 0;
   margin: 0;
   width: 100vw;
   height: 100vh;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: reverse;
-      -ms-flex-direction: row-reverse;
-          flex-direction: row-reverse;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
   background-image: url(../img/sunny.jpg);
   background-size: cover;
   color: white;
@@ -25,63 +17,63 @@ body {
 .section-1 p {
   margin: 0;
 }
-
 .section-1__forecast {
   font-weight: 100;
-  font-size: 35px;
+  font-size: 2.3vw;
 }
-
 .section-1__weather {
   font-weight: 400;
-  font-size: 40px;
-  margin-bottom: 50px !important;
+  font-size: 2.5vw;
+  margin-bottom: 3vw !important;
+  text-transform: capitalize;
   background: #ffffff;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(70%, #ffffff), to(rgba(255, 255, 255, 0)));
   background: linear-gradient(to bottom, #ffffff 70%, rgba(255, 255, 255, 0) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
 .section-1__updated {
   font-weight: 100;
 }
-
 .section-1__temperature {
   font-weight: 100;
-  font-size: 130px;
+  font-size: 8vw;
 }
-
 .section-1__text-container {
   font-weight: 100;
-  font-size: 20px;
-  display: -webkit-box;
-  display: -ms-flexbox;
+  font-size: 1.5vw;
   display: flex;
-  gap: 50px;
+  gap: 25px;
+}
+.section-1__time {
+  font-weight: 100;
+}
+.section-1__icon-container {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+.section-1__icon-container img {
+  position: absolute;
+  left: 12%;
+  top: -54px;
 }
 
 .weather-cards {
   width: 25%;
   padding: 10px 20px;
   background: rgba(255, 255, 255, 0);
-  -webkit-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(8.8px);
   -webkit-backdrop-filter: blur(8.8px);
-  border-right: 1px solid #ffffff80;
+  border-right: 1px solid rgba(255, 255, 255, 0.5019607843);
 }
 
 .main-container {
   width: 70%;
   padding: 35px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  gap: 10%;
+  flex-direction: column;
+  gap: 7%;
 }
 
 header h1 {
@@ -93,35 +85,27 @@ header h1 {
 .search {
   margin-bottom: 15px;
   padding: 5px 10px;
-  border-bottom: 1px #ffffff80 solid;
-  display: -webkit-box;
-  display: -ms-flexbox;
+  border-bottom: 1px rgba(255, 255, 255, 0.5019607843) solid;
   display: flex;
 }
-
 .search__bar {
   border: none;
   padding: 2.5px 5px;
   background-color: transparent;
   width: 100%;
 }
-
 .search__bar:focus-visible {
   outline: none;
 }
-
 .search__button {
   border: none;
   cursor: pointer;
   padding: 5px 10px;
   background-color: transparent;
 }
-
 .search__button img {
   height: 20px;
 }
-
 .search__temp {
   height: 30px;
-}
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */

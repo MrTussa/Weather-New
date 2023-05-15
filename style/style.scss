@@ -20,29 +20,48 @@ body {
   }
   &__forecast {
     font-weight: 100;
-    font-size: 35px;
+    font-size: 2.3vw;
   }
   &__weather {
     font-weight: 400;
-    font-size: 40px;
-    margin-bottom: 50px !important;
+    font-size: 2.5vw;
+    margin-bottom: 3vw !important;
+    text-transform: capitalize;
     background: #ffffff;
-    background: linear-gradient(to bottom, #ffffff 70%, rgba(255, 255, 255, 0) 100%);
+    background: linear-gradient(
+      to bottom,
+      #ffffff 70%,
+      rgba(255, 255, 255, 0) 100%
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
   &__updated {
-      font-weight: 100;
+    font-weight: 100;
   }
   &__temperature {
-      font-weight: 100;
-      font-size: 130px;
+    font-weight: 100;
+    font-size: 8vw;
   }
   &__text-container {
     font-weight: 100;
-    font-size: 20px;
-      display: flex;
-      gap: 50px;
+    font-size: 1.5vw;
+    display: flex;
+    gap: 25px;
+  }
+  &__time {
+    font-weight: 100;
+  }
+  &__icon-container {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    img {
+      // height: 50px;
+      position: absolute;
+      left: 12%;
+      top: -54px;
+    }
   }
 }
 
@@ -60,7 +79,7 @@ body {
   padding: 35px;
   display: flex;
   flex-direction: column;
-  gap: 10%;
+  gap: 7%;
 }
 
 header {
