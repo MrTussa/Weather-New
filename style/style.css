@@ -28,6 +28,7 @@ body {
   text-transform: capitalize;
   background: #ffffff;
   background: linear-gradient(to bottom, #ffffff 70%, rgba(255, 255, 255, 0) 100%);
+  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 .section-1__updated {
