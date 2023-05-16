@@ -10,6 +10,7 @@ body {
   justify-content: flex-end;
   background-image: url(../img/sunny.jpg);
   background-size: cover;
+
   color: white;
   font-family: "Roboto", sans-serif;
 }
@@ -24,7 +25,7 @@ body {
   }
   &__weather {
     font-weight: 400;
-    font-size: 2.5vw;
+    font-size: calc(1rem + 1vw);
     margin-bottom: 3vw !important;
     text-transform: capitalize;
     background: #ffffff;
@@ -33,7 +34,6 @@ body {
       #ffffff 70%,
       rgba(255, 255, 255, 0) 100%
     );
-    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
   &__updated {
@@ -41,11 +41,11 @@ body {
   }
   &__temperature {
     font-weight: 100;
-    font-size: 8vw;
+    font-size: calc(1rem + 5vw);
   }
   &__text-container {
     font-weight: 100;
-    font-size: 1.5vw;
+    font-size: calc(1rem + .4vw);
     display: flex;
     gap: 25px;
   }
@@ -67,14 +67,88 @@ body {
 
 .weather-cards {
   width: 25%;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    width: .5em;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.247);
+    border-radius: 10px;
+  }
   padding: 10px 20px;
   background: rgba(255, 255, 255, 0);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(8.8px);
   -webkit-backdrop-filter: blur(8.8px);
   border-right: 1px solid #ffffff80;
+  display: flex;
+  flex-direction: column;
+  &__border {
+    height: 4px;
+    border-radius: 10px;
+    background-color: rgba(252, 153, 24, 0.685);
+  }
+  &__time {
+    margin: 0;
+    font-weight: 100;
+    text-align: center;
+    font-size: calc(.8rem + .5vh)
+  }
+  &__daily {
+    padding: 2.5vh 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5vh;
+    &:first-child {
+      padding: 0;
+      padding-bottom: 2.5vh;
+    }
+  }
+  &__temp {
+    font-weight: 100;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    p {
+      margin: 0;
+      font-size: calc(1rem + 6vh)
+    }
+  }
+  &__desc {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    p {
+      display: flex;
+      align-items: center;
+      font-weight: 100;
+      margin: 0;
+    }
+    img {
+      width: 5vh;
+    }
+  }
+  &__sun {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    p {
+      letter-spacing: .4vh;
+      font-size: calc(1rem + 2vh);
+      display: flex;
+      align-items: center;
+      font-weight: 100;
+      margin: 0;
+    }
+  }
 }
 .main-container {
+  background: linear-gradient(
+    0deg,
+    rgba(11, 11, 13, 0.76) 0%,
+    rgba(0, 212, 255, 0) 30%
+  );
   width: 70%;
   padding: 35px;
   display: flex;
@@ -93,8 +167,10 @@ header {
   margin-bottom: 15px;
   padding: 5px 10px;
   border-bottom: 1px #ffffff80 solid;
+  
   display: flex;
   &__bar {
+    color: white;
     border: none;
     padding: 2.5px 5px;
     background-color: transparent;
@@ -114,5 +190,57 @@ header {
   }
   &__temp {
     height: 30px;
+  }
+}
+
+main {
+  display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+}
+
+.section-3 {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  p {
+    margin: 0;
+  }
+  &__time {
+    font-weight: 100;
+  }
+  &__temp {
+    font-weight: 200;
+    font-size: calc(1rem + 2.5vw);
+  }
+  &__humid {
+    font-weight: 100;
+    font-size: calc(.7rem + .4vw);
+  }
+  &__wind {
+    font-weight: 100;
+    font-size: calc(.7rem + .4vw);
+    
+  }
+  &__dec {
+    display: block;
+    width: 5vw;
+    height: 4px;
+    background-color: rgb(252, 153, 24);
+    border-radius: 3px;
+    &:last-child {
+      margin-top: 8px;
+      width: 4vw;
+      height: 3px;
+      opacity: 0.4;
+    }
+  }
+  &__container {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
   }
 }
