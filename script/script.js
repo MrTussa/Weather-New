@@ -15,6 +15,8 @@ async function getWeather(lat, lon, location) {
   const url =
     `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,relativehumidity_2m,weathercode,windspeed_10m&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset&timezone=auto&current_weather=true`;
   try {
+    const animateMain = document.querySelector(".animate-main") 
+    animateMain.classList.add("animate-down")
     const response = await fetch(url);
     const result = await response.json();
     const currentWeather = result.current_weather
@@ -26,6 +28,8 @@ async function getWeather(lat, lon, location) {
     showInfo(location, temperature, time, windspeed, humidity)
     dailyTime(result.daily)
     hourlyTime(result.hourly, currId)
+    animateMain.classList.remove("animate-down")
+    animateMain.classList.add("animate-up")
   } catch (error) {
     console.error(error);
   }
