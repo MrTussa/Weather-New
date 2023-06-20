@@ -136,3 +136,5 @@ searchBar.addEventListener("keyup", function (event) {
     getLocation(searchBar.value);
   }
 });
+
+getLocation("Samarkand")
