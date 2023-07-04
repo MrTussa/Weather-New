@@ -226,7 +226,7 @@ main {
     display: block;
     width: 5vw;
     height: 4px;
-    background-color: rgb(252, 153, 24);
+    background-color: #fc9918;
     border-radius: 3px;
     &:last-child {
       margin-top: 8px;
@@ -277,4 +277,9 @@ main {
     opacity: 1;
     transform: translateY(0%);
   }
+}
+
+#canvas {
+  width: -webkit-fill-available;
+  height: 200px;
 }

@@ -1,51 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather</title>
-    <link rel="stylesheet" href="./style/style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="./style/style.css" />
+  </head>
+  <body>
     <div class="main-container">
-        <div class="animate-main">
-            <header class="header">
-                <h1>Weather</h1>
-            </header>
-            <main>
-                <section class="section-1">
-                    <p class="section-1__forecast">Weather Forecast city</p>
-                    <p class="section-1__weather">about Lorem, ipsum.</p>
-                    <div class="section-1__icon-container">
-                        <p class="section-1__time">time</p>
-                        <img class="section-1__icon">
-                    </div>
-                    <p class="section-1__temperature">30°</p>
-                    <div class="section-1__text-container">
-                        <p class="section-1__humidity">humid</p>
-                        <p class="section-1__wind">10 kmp</p>
-                    </div>
-             </section>
-                <!-- <section class="section-2">
-                    <canvas class="canvas" width="100%" height="165px"></canvas>
-                    TODO: Сделать линии погоды на библетеке
-                </section> -->
-                <section class="section-3">
-                </section>
-            </main>
-        </div>
+      <div class="animate-main">
+        <header class="header">
+          <h1>Weather</h1>
+        </header>
+        <main>
+          <section class="section-1">
+            <p class="section-1__forecast">Weather Forecast city</p>
+            <p class="section-1__weather">about Lorem, ipsum.</p>
+            <div class="section-1__icon-container">
+              <p class="section-1__time">time</p>
+              <img class="section-1__icon" />
+            </div>
+            <p class="section-1__temperature">30°</p>
+            <div class="section-1__text-container">
+              <p class="section-1__humidity">humid</p>
+              <p class="section-1__wind">10 kmp</p>
+            </div>
+          </section>
+          <div class="section-container">
+            <section class="section-2">
+              <canvas id="canvas" ></canvas>
+              <!-- TODO: Сделать линии погоды на библетеке -->
+            </section>
+            <section class="section-3"></section>
+          </div>
+        </main>
+      </div>
     </div>
     <div class="weather-cards">
-        <div class="search">
-            <span><img src="svg/temp.svg" class="search__temp"></span>
-            <input type="text" class="search__bar">
-            <button class="search__button" type="submit"><img src="svg/search.svg" alt=""></button>
-        </div>
-        <div class="weather-cards__container">
-
-        </div>
+      <div class="search">
+        <span><img src="svg/temp.svg" class="search__temp" /></span>
+        <input type="text" class="search__bar" />
+        <button class="search__button" type="submit">
+          <img src="svg/search.svg" alt="" />
+        </button>
+      </div>
+      <div class="weather-cards__container"></div>
     </div>
 
     <script src="./script/script.js"></script>
-</body>
+  </body>
 </html>

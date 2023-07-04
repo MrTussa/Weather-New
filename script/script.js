@@ -76,19 +76,35 @@ function hourlyTime(arr, counter) {
   const container = document.querySelector(".section-3")
   container.innerHTML = ""
   let obj = ""
+  let temperatureData = []
+  let timeCounter = 0
   for (let i = counter + 1; i <= counter + 6; i++) {
     obj += `
-      <div class="section-3__hourly">
-      <p class="section-3__time">${arr.time[i].slice(-5)}</p>
-      <p class="section-3__temp">${Math.round(arr.temperature_2m[i])}°</p>
-      <div class="section-3__container">
-      <p class="section-3__humid">${arr.relativehumidity_2m[i]}%</p> 
-          <p class="section-3__wind">${Math.round(arr.windspeed_10m[i])}kpm</p>
-          </div>
-          <span class="section-3__dec"></span>
-          <span class="section-3__dec"></span>
-          </div>`
+    <div class="section-3__hourly">
+      <span class="section-3__hourly">
+        <p class="section-3__time">${arr.time[i].slice(-5)}</p>
+        <p class="section-3__temp">${Math.round(arr.temperature_2m[i])}°</p>
+        <div class="section-3__container">
+        <p class="section-3__humid">${arr.relativehumidity_2m[i]}%</p> 
+        <p class="section-3__wind">${Math.round(arr.windspeed_10m[i])}kpm</p>
+        </div>
+        <span class="section-3__dec"></span>
+        <span class="section-3__dec"></span>
+        </div>`
+
+    temperatureData.push({ x: timeCounter, y: Math.round(arr.temperature_2m[i])} )
+    timeCounter++
   }
+  const asdasd = [
+    { x: 0, y: 20 },
+    { x: 1, y: 22 },
+    { x: 2, y: 26 },
+    { x: 3, y: 24 },
+    // Добавьте дополнительные данные о температуре и времени
+  ];
+  console.log(temperatureData);
+  console.log(asdasd);
+  drawSmoothChart(temperatureData);
   container.insertAdjacentHTML("afterbegin", obj)
 }
 
@@ -100,23 +116,23 @@ function dailyTime(arr) {
     const time = arr.time[i]
     obj += `
     <div class="weather-cards__daily">
-    <p class="weather-cards__time">${time.replace(/-/g, ".")}</p>
-    <div class="weather-cards__temp">
-    <p class="weather-cards__max">${Math.round(arr.temperature_2m_max[i])}°</p>
-    <p class="weather-cards__min">${Math.round(arr.temperature_2m_min[i])}°</p>
-    </div>
-    <div class="weather-cards__sun-time">
-    <div class="weather-cards__desc">
-    <p><span><img src="./svg/sunrise-svgrepo-com.svg"></span>sunrice</p>
-    <p><span><img src="./svg/sunset-svgrepo-com.svg"></span>sunset</p>
-    </div>
-    <div class="weather-cards__sun">
+      <p class="weather-cards__time">${time.replace(/-/g, ".")}</p>
+      <div class="weather-cards__temp">
+        <p class="weather-cards__max">${Math.round(arr.temperature_2m_max[i])}°</p>
+        <p class="weather-cards__min">${Math.round(arr.temperature_2m_min[i])}°</p>
+      </div>
+      <div class="weather-cards__sun-time">
+        <div class="weather-cards__desc">
+          <p><span><img src="./svg/sunrise-svgrepo-com.svg"></span>sunrice</p>
+          <p><span><img src="./svg/sunset-svgrepo-com.svg"></span>sunset</p>
+        </div>
+        <div class="weather-cards__sun">
           <p>${arr.sunrise[i].slice(-5)}</p>
           <p>${arr.sunset[i].slice(-5)}</p>
-          </div>
-          </div>
-          </div>
-          <div class="weather-cards__border"></div>
+        </div>
+      </div>
+    </div>
+    <div class="weather-cards__border"></div>
           `
   }
   container.insertAdjacentHTML("afterbegin", obj)
@@ -138,3 +154,45 @@ searchBar.addEventListener("keyup", function (event) {
 });
 
 getLocation("Samarkand")
+
+
+
+function drawSmoothChart(temperatureData) {
+  const canvas = document.getElementById("canvas");
+  const ctx = canvas.getContext("2d");
+
+  const minTime = Math.min(...temperatureData.map((data) => data.x));
+  const maxTime = Math.max(...temperatureData.map((data) => data.x));
+  const minTemp = Math.min(...temperatureData.map((data) => data.y));
+  const maxTemp = Math.max(...temperatureData.map((data) => data.y));
+
+  const timeRange = maxTime - minTime;
+  const tempRange = maxTemp - minTemp;
+
+  ctx.beginPath();
+  ctx.moveTo(
+    ((temperatureData[0].x - minTime) / timeRange) * canvas.width,
+    canvas.height - ((temperatureData[0].y - minTemp) / tempRange) * canvas.height
+  );
+
+  for (let i = 1; i < temperatureData.length; i++) {
+    const x = ((temperatureData[i].x - minTime) / timeRange) * canvas.width;
+    const y = canvas.height - ((temperatureData[i].y - minTemp) / tempRange) * canvas.height;
+
+    const xPrev = ((temperatureData[i - 1].x - minTime) / timeRange) * canvas.width;
+    const yPrev = canvas.height - ((temperatureData[i - 1].y - minTemp) / tempRange) * canvas.height;
+
+    const cpx = xPrev + (x - xPrev) / 2;
+    const cpy = yPrev + (y - yPrev) / 2;
+
+    ctx.quadraticCurveTo(xPrev , yPrev -10, cpx, cpy -10);
+  }
+
+  ctx.lineTo(
+    ((temperatureData[temperatureData.length - 1].x - minTime) / timeRange) * canvas.width - 10,
+    canvas.height - ((temperatureData[temperatureData.length - 1].y - minTemp) / tempRange) * canvas.height - 10
+  );
+  ctx.strokeStyle = "#fc9918";
+  ctx.lineWidth = 3;
+  ctx.stroke();
+}
