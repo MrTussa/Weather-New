@@ -5,13 +5,14 @@ async function getLocation(location) {
     const response = await fetch(url);
     const result = await response.json();
     console.log(result.results[0].longitude);
-    getWeather(result.results[0].latitude, result.results[0].longitude, location)
+    getWeather(result.results[0].latitude, result.results[0].longitude)
   } catch (error) {
     console.error(error);
+    alert("City not found!")
   }
 }
 
-async function getWeather(lat, lon, location) {
+async function getWeather(lat, lon) {
   const url =
     `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,relativehumidity_2m,weathercode,windspeed_10m&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset&timezone=auto&current_weather=true`;
   try {
@@ -22,10 +23,9 @@ async function getWeather(lat, lon, location) {
     const currentWeather = result.current_weather
     const { temperature, time, windspeed } = currentWeather
     const currId = currTimeId(time, result.hourly.time)
-    console.log(result);
     const humidity = result.hourly.relativehumidity_2m[currId]
     weatherFetch(lat, lon)
-    showInfo(location, temperature, time, windspeed, humidity)
+    showInfo(result.timezone, temperature, time, windspeed, humidity, )
     dailyTime(result.daily)
     hourlyTime(result.hourly, currId)
     animateMain.classList.remove("animate-down")
@@ -95,15 +95,6 @@ function hourlyTime(arr, counter) {
     temperatureData.push({ x: timeCounter, y: Math.round(arr.temperature_2m[i])} )
     timeCounter++
   }
-  const asdasd = [
-    { x: 0, y: 20 },
-    { x: 1, y: 22 },
-    { x: 2, y: 26 },
-    { x: 3, y: 24 },
-    // Добавьте дополнительные данные о температуре и времени
-  ];
-  console.log(temperatureData);
-  console.log(asdasd);
   drawSmoothChart(temperatureData);
   container.insertAdjacentHTML("afterbegin", obj)
 }
@@ -144,12 +135,14 @@ const searchBtn = document.querySelector(".search__button")
 const searchBar = document.querySelector(".search__bar")
 searchBtn.addEventListener("click", function () {
   getLocation(searchBar.value);
+  searchBar.value = ""
 });
 
 
 searchBar.addEventListener("keyup", function (event) {
   if (event.key == "Enter") {
     getLocation(searchBar.value);
+    searchBar.value = ""
   }
 });
 
@@ -159,8 +152,9 @@ getLocation("Samarkand")
 
 function drawSmoothChart(temperatureData) {
   const canvas = document.getElementById("canvas");
+  canvas.clear
   const ctx = canvas.getContext("2d");
-
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
   const minTime = Math.min(...temperatureData.map((data) => data.x));
   const maxTime = Math.max(...temperatureData.map((data) => data.x));
   const minTemp = Math.min(...temperatureData.map((data) => data.y));
@@ -177,10 +171,10 @@ function drawSmoothChart(temperatureData) {
 
   for (let i = 1; i < temperatureData.length; i++) {
     const x = ((temperatureData[i].x - minTime) / timeRange) * canvas.width;
-    const y = canvas.height - ((temperatureData[i].y - minTemp) / tempRange) * canvas.height;
+    const y = canvas.height - ((temperatureData[i].y - minTemp) / tempRange) * canvas.height +1;
 
     const xPrev = ((temperatureData[i - 1].x - minTime) / timeRange) * canvas.width;
-    const yPrev = canvas.height - ((temperatureData[i - 1].y - minTemp) / tempRange) * canvas.height;
+    const yPrev = canvas.height - ((temperatureData[i - 1].y - minTemp) / tempRange) * canvas.height +1;
 
     const cpx = xPrev + (x - xPrev) / 2;
     const cpy = yPrev + (y - yPrev) / 2;
